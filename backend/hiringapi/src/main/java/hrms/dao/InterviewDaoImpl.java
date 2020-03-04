@@ -31,6 +31,8 @@ public class InterviewDaoImpl implements InterviewDao {
 											+ "values (?,?,?,?,?)";
 	private static String getAllInterviews = "select slot, panel, state from interview where position_id=? and "
 											+ "candidate_id=?";
+	private static String getInterviewingCandidates = "select distinct c.id, name, referral, referrer, resumelink from candidate c "
+											+ "join interview i on i.candidate_id = c.id where i.position_id=?;";
 	@Override
 	@Transactional
 	public int scheduleInterview(short positionId, String candidateId, Date slot, String panel) {
@@ -53,6 +55,12 @@ public class InterviewDaoImpl implements InterviewDao {
 	@Transactional
 	public List<Interview> getInterviewSlots(short positionId, String candidateId) {
 		return jdbcTemplate.query(getAllInterviews, new InterviewRowMapper(), positionId, candidateId);
+	}
+	
+	@Override
+	@Transactional
+	public List<Candidate> getInterviewingCanddidates(short positionId){ 
+		return jdbcTemplate.query(getInterviewingCandidates, new CandidateRowMapper(), positionId);
 	}
 
 }

@@ -56,11 +56,8 @@ public class CandidateDaoImpl implements CandidateDao {
 
 }
 
-class CandidateRowMapper implements RowMapper<Candidate> {
-
-	@Override
-	public Candidate mapRow(ResultSet rs, int rowNum) throws SQLException {
-		System.out.println("Mapping a candidate id"+rs.getInt("id"));
+abstract class CandidateMapper {
+	public Candidate mapCandidate(ResultSet rs, int rowNum) throws SQLException {
 		Candidate c = new Candidate();
 		c.setId(Integer.toString(rs.getInt("id")));
 		c.setName(rs.getString("name"));
@@ -68,6 +65,14 @@ class CandidateRowMapper implements RowMapper<Candidate> {
 		c.setReferrer(rs.getString("referrer"));
 		c.setResumeLink(rs.getString("resumelink"));
 		return c;
+	}
+}
+
+class CandidateRowMapper extends CandidateMapper implements RowMapper<Candidate> {
+
+	@Override
+	public Candidate mapRow(ResultSet rs, int rowNum) throws SQLException {
+		return mapCandidate(rs, rowNum);
 	}
 	
 }

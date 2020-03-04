@@ -25,6 +25,9 @@ public class PositionApplicantService {
 	@Autowired
 	CandidateDao candidateDao;
 	
+	@Autowired
+	InterviewDao interviewDao;
+	
 	public List<Candidate> getShortlistedApplicants(Postion p){
 		return positionAppDao.getShortListedApplicants(p);
 	}
@@ -52,17 +55,19 @@ public class PositionApplicantService {
 	@Transactional
 	public void rejectApplicants(short positionId, Set<String> candidates) {
 		Postion p = positionDao.getPosition(positionId);
+		List<Candidate> interviewing = interviewDao.getInterviewingCanddidates(positionId);
+		Set<String> interviewingIds = interviewing.stream().map(c -> c.getId()).collect(Collectors.toSet());
+		if(candidates.removeAll(interviewingIds)) {
+			//The set got modified because some of the candidates were already interviewing
+			throw new InvalidDataException("Cannot reject already interviewing candidates");
+		}
 		positionAppDao.rejectApplicants(p, candidates);
 	}
 	
-	private boolean hasApplied(Postion p, Set<String> candidates) {
-		/*Set<Candidate> unprocessed = positionAppDao.getUnprocessedApplicants(p);
-		Set<String> unprocessedIds = unprocessed.stream().map(c -> c.getId()).collect(Collectors.toSet());
-		for(String candidateId: candidates) {
-			if(!unprocessedIds.contains(candidateId))
-				return false;
-		}*/
-		return true;
+	@Transactional
+	public List<Applicant> getActiveApplicants(short positionId) {
+		Postion p = positionDao.getPosition(positionId);
+		return positionAppDao.getActiveApplicants(p);
 	}
 	
 	private boolean createCandidates(Set<Candidate> candidates) {
@@ -71,10 +76,5 @@ public class PositionApplicantService {
 		}
 		return true;
 	}
-	
-	/*
-	 * public boolean applyForPosition(short positionId, Set<Applicant> applicants)
-	 * { Postion p = positionService.getPosition(positionId); return
-	 * positionAppDao.applyForPosition(p, applicants); }
-	 */
+
 }

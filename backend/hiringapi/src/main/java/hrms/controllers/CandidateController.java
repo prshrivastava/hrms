@@ -64,7 +64,10 @@ public class CandidateController {
 		return posAppService.getRejectedApplicants(p);
 	}
 	
-	
+	@GetMapping("/active/{id}")
+	public List<Applicant> getActiveApplicants(@PathVariable short id) {
+		return posAppService.getActiveApplicants(id);
+	}
 	
 	
 }

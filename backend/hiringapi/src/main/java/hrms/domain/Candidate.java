@@ -59,8 +59,6 @@ public class Candidate {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
 		Candidate other = (Candidate) obj;
 		if (id == null) {
 			if (other.id != null)

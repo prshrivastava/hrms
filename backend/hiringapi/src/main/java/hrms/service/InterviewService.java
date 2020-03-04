@@ -25,13 +25,23 @@ public class InterviewService {
 	@Transactional
 	public int scheduleInterview(short positionId, String candidateId, Date slot, String panel) {
 		List<Candidate> shortListed = posApplicantDao.getShortListedApplicants(positionDao.getPosition(positionId));
+		//TODO: The candidate could be shortlisted or interviewing. It cannot be rejected
 		Set<String> shortListedIds = shortListed.stream().map(c -> c.getId()).collect(Collectors.toSet());
 		if(!shortListedIds.contains(candidateId))
 			throw new InvalidDataException("The candidate ["+candidateId+"] is not shortlisted for this position");
+		
 		return interviewDao.scheduleInterview(positionId, candidateId, slot, panel);
 	}
 	
+	@Transactional
 	public List<Interview> getAllInterviews(short positionId, String candidateId){
 		return interviewDao.getInterviewSlots(positionId, candidateId);
 	}
+	
+	@Transactional
+	public List<Candidate> getAllInterviewingCandidates(short positionId) {
+		return interviewDao.getInterviewingCanddidates(positionId);
+	}
+	
+	
 }

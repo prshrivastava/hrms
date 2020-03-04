@@ -1,0 +1,5 @@
+package hrms.domain;
+
+public enum ApplicantState {
+	APPLIED, SHORTLISTED, RESUME_REJECTED, INTERVIEWING, INTRVW_SELECTED, INTRVW_REJECTED
+}

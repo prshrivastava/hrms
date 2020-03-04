@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hrms.domain.Interview;
+import hrms.domain.*;
 import hrms.service.InterviewService;
 
 @RestController
@@ -29,5 +29,10 @@ public class InterviewController {
 	@GetMapping("/schedule/{posid}/{candidateId}")
 	public List<Interview> getAllInterviews(@PathVariable short posid, @PathVariable String candidateId){
 		return interviewService.getAllInterviews(posid, candidateId);
+	}
+	
+	@GetMapping("/candidates/{posid}")
+	public List<Candidate> getAllInterviewingCandidates(@PathVariable short posid){
+		return interviewService.getAllInterviewingCandidates(posid);
 	}
 }
