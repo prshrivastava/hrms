@@ -113,7 +113,7 @@ class ApplicantRowMapper extends CandidateMapper implements RowMapper<Applicant>
 		Candidate c = mapCandidate(rs, rowNum);
 		Applicant a = new Applicant();
 		a.setId(c.getId());a.setName(c.getName());a.setReferrer(c.getReferrer());
-		a.setReferral(c.isReferral());c.setResumeLink(c.getResumeLink());
+		a.setReferral(c.isReferral());a.setResumeLink(c.getResumeLink());
 		a.setState(ApplicantState.valueOf(rs.getString("state")));
 		return a;
 				

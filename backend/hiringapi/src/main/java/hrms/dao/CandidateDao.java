@@ -7,6 +7,7 @@ import hrms.domain.Postion;
 
 public interface CandidateDao {
 	public Candidate createCandidate(Candidate c);
-	public boolean updateCandidate(Candidate c);
+	public Candidate updateCandidate(Candidate c);
 	public boolean deleteCandidate(Candidate c);
+	public Candidate getCandidate(String id);
 }
