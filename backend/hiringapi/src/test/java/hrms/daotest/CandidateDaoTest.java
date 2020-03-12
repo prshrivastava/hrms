@@ -29,29 +29,20 @@ public class CandidateDaoTest {
 		  Candidate c = new Candidate(); c.setName("Jane Doe"); c.setReferral(false);
 		  c.setResumeLink("http://dnvdnxxnd"); 
 		  Candidate out = candidateDao.createCandidate(c); 
-		  assertEquals("Jane Doe", out.getName());
+		  c.setId(out.getId());
+		  assertEquals(c,out);
 		  System.out.println(c.getId());
 	}
 	
-	//@Test
+	@Test
 	public void testUpdateCandidate() {
-		Candidate c = getTestCandidate("Jane Doe");
-		Candidate testCandidate = candidateDao.createCandidate(c); 
+		Candidate c = candidateDao.getCandidate("1");
+		c.setName("Jason Doe"); c.setResumeLink("http://newlink");
+		c.setReferral(true);
+		candidateDao.updateCandidate(c);
 		
-		testCandidate.setName("Jason Doe"); testCandidate.setResumeLink("http://newlink");
-		testCandidate.setReferral(true);
-		boolean result = candidateDao.updateCandidate(testCandidate);
+		Candidate updated = candidateDao.getCandidate("1");
 		
-		assertTrue(result);
-		
-		candidateDao.deleteCandidate(testCandidate);
-	
+		assertEquals(c, updated);
 	}
-	
-	private Candidate getTestCandidate(String name) {
-		Candidate c = new Candidate(); c.setName(name); c.setReferral(false);
-		c.setResumeLink("http://dnvdnnd"); 
-		return c;
-	}
-
 }
