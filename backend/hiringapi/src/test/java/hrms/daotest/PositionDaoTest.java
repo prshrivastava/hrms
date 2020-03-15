@@ -22,26 +22,26 @@ public class PositionDaoTest {
 	@Autowired
 	PositionDao positionDao;
 	
-	//@Test
+	@Test
 	public void testGetAllPositions() {
 		List<Postion> allPositions = positionDao.getPositions();
-		System.out.println(allPositions);
+		assertTrue(allPositions.size()>=2);
 	}
-	//@Test
+	@Test
 	public void testGetOnePosition() {
 		Postion p = positionDao.getPosition((short) 1);
 		assertEquals((short)1, p.getId());
-		System.out.println(p);
 	}
 	
-	//@Test
+	@Test
 	public void testUpdatePosition() {
 		Postion p = positionDao.getPosition((short) 1);
 		String hrmgr = Long.toString(System.currentTimeMillis());
-		p.setHiringManager(hrmgr);
+		p.setHiringManager(hrmgr);p.setExperienceRange("0-10");p.setPriority((short)2);p.setSkills("Python and Django");
 		p = positionDao.updatePosition(p);
-		assertEquals(hrmgr, p.getHiringManager());
 		
+		Postion updated = positionDao.getPosition((short)1);
+		assertEquals(p, updated);
 	}
 	
 	@Test

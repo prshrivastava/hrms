@@ -40,10 +40,11 @@ public class PositionApplicantService {
 	}
 	
 	@Transactional
-	public void applyForPosition(Postion p, Set<Candidate> candidates) {
+	public List<Candidate> createCandidatesAndapplyForPosition(Postion p, List<Candidate> candidates) {
 		createCandidates(candidates);
 		Set<String> candidateIds = candidates.stream().map(c -> c.getId()).collect(Collectors.toSet());
 		positionAppDao.applyForPosition(p, candidateIds);
+		return candidates;
 	}
 	
 	@Transactional
@@ -70,7 +71,7 @@ public class PositionApplicantService {
 		return positionAppDao.getActiveApplicants(p);
 	}
 	
-	private boolean createCandidates(Set<Candidate> candidates) {
+	private boolean createCandidates(List<Candidate> candidates) {
 		for(Candidate c: candidates) {
 			candidateDao.createCandidate(c);
 		}

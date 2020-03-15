@@ -28,9 +28,9 @@ public class CandidateController {
 	PostionService positionService;
 
 	@PostMapping("/apply/{id}")
-	public void aplyForPosition(@PathVariable short id, @RequestBody Set<Candidate> candidates) {
+	public void aplyForPosition(@PathVariable short id, @RequestBody List<Candidate> candidates) {
 		Postion p = positionService.getPosition(id);
-		posAppService.applyForPosition(p, candidates);
+		posAppService.createCandidatesAndapplyForPosition(p, candidates);
 	}
 	
 	@PostMapping("/shortlist/{id}")

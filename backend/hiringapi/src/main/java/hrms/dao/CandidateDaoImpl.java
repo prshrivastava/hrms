@@ -28,6 +28,8 @@ public class CandidateDaoImpl implements CandidateDao {
 	@Transactional
 	@Override
 	public Candidate createCandidate(Candidate c) {
+		if(c.getId()!=null && !c.getId().contentEquals("0"))
+			throw new InvalidDataException("Creating candidate with non zero id ["+c.getId()+"] is not allowed");
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
 		jdbcTemplate.update(connection -> {

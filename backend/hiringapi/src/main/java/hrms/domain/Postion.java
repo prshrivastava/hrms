@@ -52,5 +52,51 @@ public class Postion {
 		return "Postion [id=" + id + ", name=" + name + ", skills=" + skills + ", experienceRange=" + experienceRange
 				+ ", hiringManager=" + hiringManager + ", priority=" + priority + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((experienceRange == null) ? 0 : experienceRange.hashCode());
+		result = prime * result + ((hiringManager == null) ? 0 : hiringManager.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + priority;
+		result = prime * result + ((skills == null) ? 0 : skills.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		Postion other = (Postion) obj;
+		if (experienceRange == null) {
+			if (other.experienceRange != null)
+				return false;
+		} else if (!experienceRange.equals(other.experienceRange))
+			return false;
+		if (hiringManager == null) {
+			if (other.hiringManager != null)
+				return false;
+		} else if (!hiringManager.equals(other.hiringManager))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (priority != other.priority)
+			return false;
+		if (skills == null) {
+			if (other.skills != null)
+				return false;
+		} else if (!skills.equals(other.skills))
+			return false;
+		return true;
+	}
+	
 		
 }
