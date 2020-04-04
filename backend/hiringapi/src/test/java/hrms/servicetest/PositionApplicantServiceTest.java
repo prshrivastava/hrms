@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -33,7 +32,7 @@ public class PositionApplicantServiceTest {
 	
 	@Test
 	public void testApply() {
-		Candidate c1 = generateRandomCandidate();
+		Candidate c1 = TestUtilities.generateRandomCandidate();
 		Postion p1 = posDao.getPosition((short)1);
 		List<Candidate> candidates = new ArrayList<Candidate>();
 		candidates.add(c1);
@@ -45,7 +44,7 @@ public class PositionApplicantServiceTest {
 	}
 	@Test
 	public void testShortlistPosition() {
-		Candidate c1 = generateRandomCandidate();
+		Candidate c1 = TestUtilities.generateRandomCandidate();
 		Postion p1 = posDao.getPosition((short)1);
 		List<Candidate> candidates = new ArrayList<Candidate>();
 		candidates.add(c1);
@@ -72,7 +71,7 @@ public class PositionApplicantServiceTest {
 	}
 	@Test
 	public void testReject() {
-		Candidate c1 = generateRandomCandidate();
+		Candidate c1 = TestUtilities.generateRandomCandidate();
 		Postion p1 = posDao.getPosition((short)1);
 		List<Candidate> candidates = new ArrayList<Candidate>();
 		candidates.add(c1);
@@ -97,13 +96,4 @@ public class PositionApplicantServiceTest {
 		assertThrows(InvalidDataException.class, () -> posAppService.rejectApplicants((short)1, candidateIds));
 	}
 	
-	private Candidate generateRandomCandidate() {
-		Candidate c = new Candidate();
-		long currentTime = System.currentTimeMillis();
-		String name = Long.toString(currentTime);
-		c.setName(name);
-		c.setReferral(false);
-		c.setResumeLink("http://drive/"+name);
-		return c;
-	}
 }

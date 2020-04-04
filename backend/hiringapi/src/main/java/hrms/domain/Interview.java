@@ -7,12 +7,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Interview {
 	
+	private String id;
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	private Date slot;
 	private String panel;
 	private InterviewState state;
 	
-	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public Date  getSlot() {
 		return slot;
 	}
@@ -33,7 +39,8 @@ public class Interview {
 	}
 	@Override
 	public String toString() {
-		return "Interview [slot=" + slot + ", panel=" + panel + ", state=" + state + "]";
+		return "Interview [id=" + id + ", slot=" + slot + ", panel=" + panel + ", state=" + state + "]";
 	}
+	
 }
 

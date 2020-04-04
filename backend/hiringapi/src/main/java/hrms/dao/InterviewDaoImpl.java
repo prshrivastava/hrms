@@ -16,9 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import hrms.domain.Candidate;
-import hrms.domain.Interview;
-import hrms.domain.InterviewState;
+import hrms.domain.*;
 
 
 @Component
@@ -29,7 +27,7 @@ public class InterviewDaoImpl implements InterviewDao {
 	
 	private static String createSchedule = "insert into interview (position_id, candidate_id, state, slot, panel) "
 											+ "values (?,?,?,?,?)";
-	private static String getAllInterviews = "select slot, panel, state from interview where position_id=? and "
+	private static String getAllInterviews = "select id, slot, panel, state from interview where position_id=? and "
 											+ "candidate_id=?";
 	private static String getInterviewingCandidates = "select distinct c.id, name, referral, referrer, resumelink from candidate c "
 											+ "join interview i on i.candidate_id = c.id where i.position_id=?;";
@@ -69,6 +67,7 @@ class InterviewRowMapper implements RowMapper<Interview> {
 	@Override
 	public Interview mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Interview i = new Interview();
+		i.setId(rs.getString("id"));
 		i.setPanel(rs.getString("panel"));
 		i.setSlot(new Date(rs.getTimestamp("slot").getTime()));
 		i.setState(InterviewState.valueOf(rs.getString("state")));
