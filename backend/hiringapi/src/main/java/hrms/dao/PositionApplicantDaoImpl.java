@@ -72,9 +72,9 @@ public class PositionApplicantDaoImpl implements PositionApplicantDao {
 	
 	@Transactional
 	@Override
-	public int markAsInterviewing(Postion p, String candidateId) {
+	public int markAsInterviewing(short positionId, String candidateId) {
 		return jdbcTemplate.update(updateState,
-				ApplicantState.INTERVIEWING.toString(), p.getId(), candidateId);
+				ApplicantState.INTERVIEWING.toString(), positionId, candidateId);
 	}
 
 	@Override
@@ -93,6 +93,12 @@ public class PositionApplicantDaoImpl implements PositionApplicantDao {
 	public List<Candidate> getRejectedApplicants(Postion p) {
 		return jdbcTemplate.query(queryByState,
 				new CandidateRowMapper(),p.getId(), ApplicantState.RESUME_REJECTED.toString());
+	}
+	
+	@Override
+	public List<Candidate> getInterviewingApplicants(Postion p) {
+		return jdbcTemplate.query(queryByState,
+				new CandidateRowMapper(),p.getId(), ApplicantState.INTERVIEWING.toString());
 	}
 	
 	@Transactional

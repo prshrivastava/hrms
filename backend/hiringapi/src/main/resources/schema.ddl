@@ -48,3 +48,12 @@ CREATE TABLE if not exists interview (
   CONSTRAINT candidateFK2 FOREIGN KEY (candidate_id) REFERENCES candidate (id),
   CONSTRAINT positionFK2 FOREIGN KEY (position_id) REFERENCES position (id)
 );
+
+CREATE TABLE if not exists feedback (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  interview_id INT NOT NULL,
+  comments varchar(1028) NOT NULL,
+  submitted_on timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  submitted_by varchar(45) DEFAULT NULL,
+  CONSTRAINT interviewFK1 FOREIGN KEY (interview_id) REFERENCES interview (id)
+);

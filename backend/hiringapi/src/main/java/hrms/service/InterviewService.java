@@ -1,6 +1,5 @@
 package hrms.service;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,14 +21,20 @@ public class InterviewService {
 	@Autowired
 	private PositionDao positionDao;
 	
+	@Autowired
+	private FeedbackDao feedbackDao;
+	
 	@Transactional
 	public int scheduleInterview(short positionId, String candidateId, Date slot, String panel) {
-		List<Candidate> shortListed = posApplicantDao.getShortListedApplicants(positionDao.getPosition(positionId));
-		//TODO: The candidate could be shortlisted or interviewing. It cannot be rejected
+		Postion p = positionDao.getPosition(positionId);
+		List<Candidate> shortListed = posApplicantDao.getShortListedApplicants(p);
+		List<Candidate> interviewing = posApplicantDao.getInterviewingApplicants(p);
 		Set<String> shortListedIds = shortListed.stream().map(c -> c.getId()).collect(Collectors.toSet());
-		if(!shortListedIds.contains(candidateId))
+		Set<String> interviewingIds = interviewing.stream().map(c -> c.getId()).collect(Collectors.toSet());
+		if(!shortListedIds.contains(candidateId) && !interviewingIds.contains(candidateId))
 			throw new InvalidDataException("The candidate ["+candidateId+"] is not shortlisted for this position");
 		
+		posApplicantDao.markAsInterviewing(positionId, candidateId);
 		return interviewDao.scheduleInterview(positionId, candidateId, slot, panel);
 	}
 	
@@ -43,5 +48,14 @@ public class InterviewService {
 		return interviewDao.getInterviewingCanddidates(positionId);
 	}
 	
+	@Transactional
+	public int submitFeedback(int interviewId, String comments) {
+		 //TODO: The interview should be marked as CONDUCTED 
+		return feedbackDao.submitFeedback(interviewId, comments);
+	}
 	
+	@Transactional
+	public List<InterviewFeedback> getInterviewFeedback(int candidateId){
+		return feedbackDao.getFeedback(candidateId);
+	}
 }

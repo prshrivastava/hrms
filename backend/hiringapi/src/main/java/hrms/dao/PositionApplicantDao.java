@@ -14,7 +14,8 @@ public interface PositionApplicantDao {
 	public List<Candidate> getUnprocessedApplicants(Postion p);
 	public List<Candidate> getShortListedApplicants(Postion p);
 	public List<Candidate> getRejectedApplicants(Postion p);
-	public int markAsInterviewing(Postion p, String candidateId);
+	public List<Candidate> getInterviewingApplicants(Postion p);
+	public int markAsInterviewing(short positionId, String candidateId);
 	public List<Applicant> getActiveApplicants(Postion p);
 
 }

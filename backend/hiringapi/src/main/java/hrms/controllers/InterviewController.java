@@ -35,4 +35,14 @@ public class InterviewController {
 	public List<Candidate> getAllInterviewingCandidates(@PathVariable short posid){
 		return interviewService.getAllInterviewingCandidates(posid);
 	}
+	
+	@PostMapping("/feedback/{interviewId}")
+	public int submitFeedback(@PathVariable int interviewId, @RequestBody String comments) {
+		return interviewService.submitFeedback(interviewId, comments);
+	}
+	
+	@GetMapping("/feedback/{candidateId}")
+	public List<InterviewFeedback> getInterviewFeedback(@PathVariable int candidateId) {
+		return interviewService.getInterviewFeedback(candidateId);
+	}
 }
