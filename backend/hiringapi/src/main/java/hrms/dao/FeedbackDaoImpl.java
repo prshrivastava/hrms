@@ -80,7 +80,7 @@ class InterviewFeedbackExtractor implements ResultSetExtractor<List<InterviewFee
 	private Feedback mapFeedback(ResultSet rs) throws SQLException {
 		Feedback f = new Feedback();
 		f.setComments(rs.getString("comments"));
-		f.setSubmittedOn(rs.getDate("submitted_on"));
+		f.setSubmittedOn(new Date(rs.getTimestamp("submitted_on").getTime()));
 		return f;
 	}
 
