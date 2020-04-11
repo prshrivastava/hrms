@@ -1,0 +1,25 @@
+
+
+<div style="float: left; width:280px;">
+    <h4 class="ntitle" style="text-align: center;">{{title}}</h4>
+    <table class="hrmstable">
+        <thead>
+            <tr>
+            <th>Id</th>
+            <th>Position</th>
+            <th>Hiring Manager</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr [ngClass]="{'selected': position.id==selectedPositionId}" *ngFor="let position of positions$| async as positions">
+                <td> {{position.id}}</td>
+                <td> <span (click)="selectPosition(position)" class="showlink">{{position.name}}</span></td>
+                <td>{{position.hiringManager}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="margin-left:290px;padding-top:60px;">
+    <router-outlet></router-outlet>
+</div>

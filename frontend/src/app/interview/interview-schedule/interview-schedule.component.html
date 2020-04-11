@@ -1,0 +1,17 @@
+<div class="card" style="width: 600px;">
+    <div *ngIf="position.id!='0'; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <div style="text-align:center;margin-bottom: 10px;">
+            <span *ngIf="position" class="ntitle">
+                {{position.name}}| {{position.experienceRange}} | {{position.skills}}
+            </span>
+        </div>
+        <candidate-interview style="width:100%;margin-top:10px" *ngFor="let c of activeCandidates" [candidate]="c"
+            [position]="position">
+        </candidate-interview>
+        <p style="clear:left;"></p>
+    </ng-template>
+    <ng-template #elseBlock>
+        <div style="padding:65px 0px;text-align: center;">Please select a position.</div>
+    </ng-template>
+</div>

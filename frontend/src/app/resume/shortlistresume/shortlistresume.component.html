@@ -1,0 +1,46 @@
+<div class="card" style="width: 500px;">
+    <div *ngIf="position.id!='0'; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <div style="text-align:center;">
+            <span class="ntitle">
+                Id:{{position.id}} {{position.name}}| {{position.experienceRange}} | {{position.skills}}
+            </span>
+        </div>
+
+        <span *ngIf="candidates.length==0">No candidates found</span>
+        <table *ngIf="candidates.length>0" class="hrmstable">
+            <thead>
+                <tr>
+                    <th colspan="2">Name</th>
+                    <th>Decision</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let candidate of candidates" [ngClass]="{'selected': candidate.dirty == true}">
+                    <td style="width:200px;"><a target="_blank" href={{candidate.resumeLink}}>{{candidate.name}}</a>
+                        <span *ngIf="candidate.referral" class="badge  badge-yellow">Referral</span>
+                    </td>
+                    <td style="width:32px;">
+                        <i *ngIf="candidate.newState!='APPLIED'" class="fas fa-circle ml-1" [ngClass]="{
+                                'text-success': candidate.newState=='SHORTLISTED',
+                                'text-danger': candidate.newState=='RESUME_REJECTED'}"></i>
+                    </td>
+                    <td style="width:95px;">
+                        <i (click)="onShortlist(candidate)"
+                            [ngClass]="{'enableshortlist': enableShortListAction(candidate), 'graycontrol': !enableShortListAction(candidate)}"
+                            class="fas fa-check graycontrol"></i>
+                        <i (click)="onReject(candidate)"
+                            [ngClass]="{'enableshortlist': enableRejectAction(candidate), 'graycontrol': !enableRejectAction(candidate)}"
+                            class="fas fa-times graycontrol"></i>
+                        <i *ngIf="candidate.dirty" (click)="undo(candidate)" style="cursor:pointer;"
+                            class="fas fa-undo-alt "></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button *ngIf="candidates.length>0" type="submit" class="submitbtn" (click)="onSubmit()">Submit</button>
+    </ng-template>
+    <ng-template #elseBlock>
+        <div style="padding:65px 0px;text-align: center;">Please select a position.</div>
+    </ng-template>
+</div>

@@ -1,0 +1,14 @@
+<div *ngIf="interviewFeedback && interviewFeedback.length>0; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <div *ngFor="let f of interviewFeedback" class="panel">
+        <p class="ntitle">Interview on {{f.interview.slot | date: 'EE M/d/yy, h:mm a'}}</p>
+        <div *ngFor="let c of f.feedback">
+            <i class="text-secondary">Comment added on {{c.submittedOn | date: 'M/d/yy, h:mm a'}}</i>
+            <p>{{c.comments}}</p>
+        </div>
+
+    </div>
+</ng-template>
+<ng-template #elseBlock>
+    <div style="padding:15px 0px;text-align: center;">No feedback has been submitted so far for {{candidate.name}}</div>
+</ng-template>

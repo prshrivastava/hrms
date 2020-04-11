@@ -1,0 +1,33 @@
+<div class="panel">
+    <span style="float:left;width:90%;">{{candidate.name}}</span>
+    <div (click)="toggle()" class="fas angles"
+        [ngClass]="{'fa-angle-up': state=='expand','fa-angle-down': state=='collapse' }"></div>
+    <div>
+        <div [ngClass]="{'visible': state=='expand', 'hidden': state=='collapse'}">
+            <div *ngIf="candidate.interviews">
+                <table class="hrmstable">
+                    <tr *ngFor="let i of candidate.interviews">
+                        <td>{{i.slot | date: 'EE M/d/yy, h:mm a'}}</td><td>{{i.panel}}</td><td>{{i.state}}</td>
+                    </tr>
+                </table>
+            </div>
+            <form [formGroup]="scheduleForm" (ngSubmit)="scheduleInterview()" class="hrmsform">
+                <div class="formrow">
+                    <label>Date</label>
+                    <input type="text" formControlName="date" name="date" style="width:65px;" placeholder="dd/mm/yy"
+                        [ngClass]="{'submitted': submitted==true}">
+                    <label style="margin-left:20px;">Time</label>
+                    <input type="text" formControlName="time" name="time" style="width:45px;" placeholder="hh:mm"
+                        [ngClass]="{'submitted': submitted==true}">
+                    <label style="margin-left:20px;">Interviewers</label>
+                    <input type="text" formControlName="interviewers" name="interviewers" style="width:150px;">
+                </div>
+                <button type="submit" class="submitbtn" style="float:right;margin-right: 40px;"
+                    [disabled]="scheduleForm.pristine">Schedule</button>
+                <button type="button" class="cancelbtn" style="float:right;" (click)="cancel()">Clear</button>
+                <p style="clear:right;"></p>
+            </form>
+        </div>
+    </div>
+</div>
+<hr>

@@ -1,0 +1,16 @@
+<div class="topbar">
+  <h3 style="padding:10px;">HRMS App</h3>
+</div>
+<div class="sidenav">
+  <a routerLink="/position" title="Manage positions" class="fas fa-chair"></a>
+  <a [routerLink]="['/upload','0']" title="Upload resumes" class="far fa-file-alt"></a>
+  <a [routerLink]="['/screen','0']" title="Screen resumes" class="fas fa-user"></a>
+  <a [routerLink]="['/schedule','0']" title="Schedule interviews" class="far fa-calendar-alt"></a>
+  <a [routerLink]="['/feedback','0']" title="Submit Feedback" class="far fa-comment-dots"></a>
+  <a routerLink="/charts" title="Charts" class="fas fa-chart-bar"></a>
+</div>
+
+<!-- Page content -->
+<div class="main">
+    <router-outlet></router-outlet>
+</div>

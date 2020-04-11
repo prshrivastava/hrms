@@ -1,0 +1,38 @@
+<div style="width: 850px;" class="card">
+    <div *ngIf="position.id!='0'; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <div>
+            <span class="ntitle">
+                Id:{{position.id}} {{position.name}} | {{position.experienceRange}} | {{position.skills}}
+            </span>
+        </div>
+        <form [formGroup]="resumeForm" (ngSubmit)="uploadResumes()" class="hrmsform">
+
+            <div formArrayName="candidates" *ngFor="let cand of candidates.controls; let i = index;">
+
+                <div [formGroupName]="i" class="formrow">
+                    <label for="name" style="width:50px;">Name</label>
+                    <input formControlName="name" type="text" placeholder="Candidate name">
+                    <label for="resumeLink" style="width:50px;">URL</label>
+                    <input formControlName="resumeLink" type="text" placeholder="Resume Link" style="width:400px;">
+                    <!-- <div class="form-check form-check-inline"> -->
+                    <input style="margin-left:20px;" type="checkbox" value="" formControlName="referral"
+                        id="defaultCheck1">
+                    <label style="width:50px;" for="defaultCheck1">
+                        Referral
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button type="button" style="margin-left:300px;" (click)="addCandidate()"><i
+                        class="fas fa-plus"></i></button>
+            </div>
+            <div>
+                <button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
+                <button type="submit" class="submitbtn" [disabled]="resumeForm.pristine">Save
+                    Resumes</button>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template #elseBlock><div style="padding:65px 0px;text-align: center;">Please select a position.</div></ng-template>
+</div>

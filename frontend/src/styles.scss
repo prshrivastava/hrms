@@ -1,0 +1,176 @@
+/* You can add global styles to this file, and also import other style files */
+// @import '../node_modules/bootstrap/dist/css/bootstrap.css';
+@import './assets/fontawesome-free-5.11.2-web/css/all.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import './themecolors.scss';
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+    background-color: scale-color($nblue4, $lightness:80%);
+}
+
+a {
+    color: $nblue1;
+}
+.topbar {
+    background-color: $niyujcolor;
+    margin:2px;
+    color: $nblue1;
+}
+
+/* The table styling */
+.hrmstable {
+    //width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.hrmstable td, .hrmstable th {
+    border: 1px solid $nyel3;
+    padding: 3px 7px 2px 7px;
+    text-align: left;
+}
+
+.hrmstable th {
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background: scale-color($nyelmain,$lightness: -20%);
+    color: white;
+}
+.hrmstable tr {
+    background-color: $nyel2;
+}
+
+.hrmstable.banded tr:nth-of-type(even){
+    background-color: lighten($nyel1, 20%);
+}
+.hrmstable tr.selected {
+    background-color: $nyel1;
+}
+
+/* The text styling */
+.ntitle {
+    color: $norngmain;
+}
+.text-secondary {
+    color:gray;
+}
+.text-success {
+    color: green;
+}
+.text-danger {
+    color:red;
+}
+
+button {
+    padding: 6px 12px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px gray;
+    cursor: pointer;
+}
+button[disabled] {
+    cursor: default;
+}
+
+select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    background-color: rgba(250, 250, 250, 0.699);
+    box-shadow: inset 0 0 10px rgba(255,255,255,.75);
+    padding: 5px;
+}
+/* The Form styling */
+.hrmsform {
+    padding: 10px;
+}
+.hrmsform label {
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+    color: $norng4;
+}
+
+.hrmsform .formrow {
+    margin-bottom: 10px;
+}
+.hrmsform input[type="text"], textarea {
+    border-radius: 5px;
+    border: 1px solid $nblue4;
+    background-color: rgba(250, 250, 250, 0.699);
+    box-shadow: inset 0 0 10px rgba(255,255,255,.75);
+    padding: 5px;
+}
+
+.hrmsform input.submitted.ng-invalid {
+    border: 1px solid $norng3;
+}
+
+
+.hrmsform button.cancelbtn {
+    background-color: $norng1;
+    color: white;
+}
+
+.hrmsform button.cancelbtn:hover {
+    background-color: $norng2;
+}
+
+button.submitbtn {
+    background-color: $nblue2;
+    color: white;
+}
+
+button.submitbtn:hover:not([disabled]) {
+    background-color: $nblue1;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 4px;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 5px;
+    margin: 0px 5px;
+    font-size: 0.8em;
+}
+.badge.badge-yellow {
+    background-color: $nyel3;
+    color: white;
+}
+
+i {
+    margin: 0px 8px;
+}
+
+
+.card {
+    border: 1px solid $nblue2;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: scale-color($nblue4, $lightness:50%);;
+}
+
+.panel {
+    padding: 10px;
+    background-color: $nblue4;
+    margin-bottom: 10px;
+}
+
+.showlink {
+    cursor: pointer;
+    color: $nblue1;
+}
+.callforaction {
+    color: gray;
+}
+.callforaction:hover {
+    color: $nblue1;
+    font-weight: bolder;
+    cursor: pointer;
+}

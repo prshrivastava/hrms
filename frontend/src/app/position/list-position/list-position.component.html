@@ -1,0 +1,33 @@
+<h4 class="ntitle">Current Open Positions</h4>
+<div *ngIf="positions">
+    <table class="hrmstable banded">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Skill</th>
+                <th>Experience</th>
+                <th>Hiring Manager</th>
+                <th>Priority</th>
+                <th>To Process</th>
+                <th>Shortlisted</th>
+                <th>Rejected</th>
+                <th>Interviewing</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let position of positions">
+                <td>{{position.id}}</td>
+                <td><a [routerLink]="['../', position.id,'edit']">{{position.name}}</a></td>
+                <td>{{position.skills}}</td>
+                <td>{{position.experienceRange}}</td>
+                <td>{{position.hiringManager}}</td>
+                <td>{{position.priority}}</td>
+                <td>{{position.appliedCount}}</td>
+                <td>{{position.shortListCount}}</td>
+                <td>{{position.resumeRejectedCount}}</td>
+                <td>{{position.interviewingCount}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

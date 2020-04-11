@@ -1,0 +1,46 @@
+<div class="card" style="width: 800px;">
+    <div *ngIf="position.id!='0'; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <div style="text-align:center;margin-bottom: 10px;">
+            <span *ngIf="position" class="ntitle">
+                {{position.name}}| {{position.experienceRange}} | {{position.skills}}
+            </span>
+        </div>
+        <div>
+            <table class="hrmstable">
+                <ng-container *ngFor="let c of activeCandidates">
+                    <tr>
+                        <td [attr.rowspan]="c.interviews.length + 1" class="showlink" (click)="selectCandidate(c)">
+                            {{c.name}}</td>
+                    </tr>
+                    <tr *ngFor="let interview of c.interviews;" >
+                        <td>{{interview.slot | date: 'EE M/d/yy h:mm a'}}</td>
+                        <td>{{interview.panel}} 
+                            <i (click)="selectForSubmittingFeedback(c,interview)" class="far fa-comment-dots callforaction"></i>
+                        </td>
+                    </tr>
+                </ng-container>
+
+            </table>
+            <div *ngIf="submitFeedbackFor" class="panel">
+                Feedback for {{showFeedbackForCandidate.name}} on {{submitFeedbackFor.slot | date: 'EE M/d/yy h:mm a'}}
+                <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="hrmsform">
+                    <textarea formControlName="comment" name="comment" style="width:100%;min-height:100px;"
+                        placeholder="Your comments"></textarea>
+                        <button type="submit" class="submitbtn" style="float:right;margin-right: 40px;"
+                        [disabled]="feedbackForm.pristine">Submit</button>
+                        <button type="button" class="cancelbtn" style="float:right;" (click)="cancel()">Cancel</button>
+                    <p style="clear:right;"></p>
+                </form>
+            </div>
+
+        </div>
+        <div *ngIf="showFeedbackForCandidate">
+            <hrms-feedback-display [candidate]="showFeedbackForCandidate"></hrms-feedback-display>
+        </div>
+        <!--<div style="clear: left; line-height: 0; height: 0;">&nbsp;</div>-->
+    </ng-template>
+    <ng-template #elseBlock>
+        <div style="padding:65px 0px;text-align: center;">Please select a position.</div>
+    </ng-template>
+</div>

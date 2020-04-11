@@ -1,0 +1,29 @@
+<div class="card" style="width:500px;">
+<form [formGroup]="positionForm" (ngSubmit)="onSubmit()" class="hrmsform">
+    <div class="formrow">
+        <label for="nameofpos" style="width:130px;">Name</label>
+        <input type="text" id="nameofpos" formControlName="name" name="name" style="width:200px;">
+    </div>
+    <div class="formrow">
+        <label for="skills" style="width:130px;">Skills</label>
+        <input type="text" id="skills" formControlName="skills" name="skills" style="width:300px;">
+    </div>
+    <div class="formrow">
+        <label for="experience" style="width:130px;">Experience Range</label>
+        <input type="text" id="experience" formControlName="experienceRange" name="experience" style="width:100px;">
+    </div>
+    <div class="formrow">
+        <label for="hiringManager" style="width:130px;">Hiring Manager</label>
+        <input type="text" id="mgr" formControlName="hiringManager" name="hiringManager" style="width:200px;">
+    </div>
+    <div class="formrow">
+            <label for="priority" style="width:130px;">Priority</label>
+            <input type="text" id="priority" formControlName="priority" name="priority" style="width:50px;">
+    </div>
+        <button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
+        <button *ngIf="editMode==false" type="submit" class="submitbtn"
+            [disabled]="positionForm.pristine">Create Position</button>
+        <button *ngIf="editMode==true" type="submit" class="submitbtn"
+            [disabled]="positionForm.pristine">Save Position</button>
+</form>
+</div>
