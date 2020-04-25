@@ -18,15 +18,13 @@ export class PositionViewService {
 
     public getPositionView(): Observable<PositionView[]> {
         return this.positionService.getPositions().pipe(
-            //tap(p => console.log(p)),
             mergeMap(p => this.getMergedActiveApplicants(p))
         );
     }
 
     private getMergedActiveApplicants(positions: Position[]): Observable<PositionView[]> {
         return from(positions).pipe(
-            map(p => this.getActiveapplicantCount(p)),
-            mergeAll()
+            mergeMap(p => this.getActiveapplicantCount(p))
         ).pipe(toArray());
     }
 

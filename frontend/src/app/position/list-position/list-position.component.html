@@ -20,13 +20,13 @@
                 <td>{{position.id}}</td>
                 <td><a [routerLink]="['../', position.id,'edit']">{{position.name}}</a></td>
                 <td>{{position.skills}}</td>
-                <td>{{position.experienceRange}}</td>
+                <td style="text-align: right;">{{position.experienceRange}}</td>
                 <td>{{position.hiringManager}}</td>
-                <td>{{position.priority}}</td>
-                <td>{{position.appliedCount}}</td>
-                <td>{{position.shortListCount}}</td>
-                <td>{{position.resumeRejectedCount}}</td>
-                <td>{{position.interviewingCount}}</td>
+                <td style="text-align: right;">{{position.priority}}</td>
+                <td style="text-align: right;">{{position.appliedCount}}</td>
+                <td style="text-align: right;">{{position.shortListCount}}</td>
+                <td style="text-align: right;">{{position.resumeRejectedCount}}</td>
+                <td style="text-align: right;">{{position.interviewingCount}}</td>
             </tr>
         </tbody>
     </table>

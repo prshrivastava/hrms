@@ -1,7 +1,5 @@
 package hrms;
 
-import java.util.Arrays;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,26 +27,6 @@ public class HrmsConfig {
 	@Autowired
 	Environment env;
 	
-	/*
-	@Bean
-	public MongoClient mongoClient() {
-		//System.out.println("\n\nmongodb.host="+env.getProperty("mongodb.host")+"\n");
-		return  MongoClients.create(MongoClientSettings.builder()
-                .applyToClusterSettings(builder ->
-                builder.hosts(Arrays.asList(
-                		new ServerAddress(env.getProperty("mongodb.host","localhost"),
-                							env.getProperty("mongodb.port",Integer.class, 27017))
-                		))
-                )
-        .build());
-	}
-	
-	@Bean
-	public MongoOperations mongoOperations() {
-		return new MongoTemplate(mongoClient(), env.getProperty("mongodb.database","hrms"));
-	}
-	*/
-	
 	@Bean
 	public DataSource dataSource() {
 		HikariConfig config = new HikariConfig();
@@ -58,7 +36,6 @@ public class HrmsConfig {
 		config.addDataSourceProperty("cachePrepStmts", "true");
 		config.addDataSourceProperty("prepStmtCacheSize", "250");
 		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-		//config.setDriverClassName("com.mysql.jdbc.Driver");
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
 		return new HikariDataSource(config);
